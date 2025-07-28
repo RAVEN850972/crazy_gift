@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap — Telegram WebApp Casino</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --accent: #1e1e1e;
+      --gray: #dcdcdc;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: var(--accent);
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      margin-top: 2rem;
+      border-bottom: 2px solid var(--gray);
+      padding-bottom: 0.3rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--gray);
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
+    .status {
+      font-weight: bold;
+    }
+    .done { color: green; }
+    .wip { color: orange; }
+    .todo { color: gray; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Roadmap: Telegram WebApp Casino</h1>
+    <p>Проект: Web-приложение казино с кейсами, TON-платежами и игровыми механиками</p>
+    <p>Дедлайн: 25 августа 2025 • Этап: <strong>Production Beta</strong></p>
+  </header>
+
+  <section>
+    <h2>🎯 Цели проекта</h2>
+    <ul>
+      <li>Создать Telegram WebApp-казино с кейсами, апгрейдами и экономикой</li>
+      <li>Интегрировать реальные платежи через TON</li>
+      <li>Обеспечить хранение данных (баланс, инвентарь, история)</li>
+      <li>Добавить демо-режим, фильтрацию, поддержку и рефералку</li>
+      <li>Обеспечить прозрачную визуализацию прогресса разработки</li>
+    </ul>
+
+    <h2>📆 Roadmap (4 недели)</h2>
+
+    <h3>Week 1: MVP и демо-прототип</h3>
+    <table>
+      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
+      <tr><td>Главный UI</td><td>Кейсы, баланс, профиль</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Демо-режим</td><td>Фейковое открытие кейсов</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Инвентарь</td><td>Выигрыши с продажей</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>LocalStorage</td><td>Баланс и инвентарь</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>TonConnect</td><td>Подключение кошелька</td><td class="status todo">⏳ Планируется</td></tr>
+    </table>
+
+    <h3>Week 2: TON и база данных</h3>
+    <table>
+      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
+      <tr><td>База данных</td><td>SQLite или Firebase</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>TON-платежи</td><td>Интеграция Tonkeeper</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Пополнение звёзд</td><td>Фиктивное с бонусами</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>История операций</td><td>Пополнения, кейсы</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Категории кейсов</td><td>Группы и шансы</td><td class="status todo">⏳ Планируется</td></tr>
+    </table>
+
+    <h3>Week 3: Игровая логика и удержание</h3>
+    <table>
+      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
+      <tr><td>Апгрейд</td><td>Риск ×2/×3/×10</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Вывод подарков</td><td>Заморозка и уведомление</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Live-лента</td><td>Победы в реальном времени</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Рефералка</td><td>Ссылка, доход</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>История всего</td><td>Открытия, апгрейды, выводы</td><td class="status todo">⏳ Планируется</td></tr>
+    </table>
+
+    <h3>Week 4: Полировка и публикация</h3>
+    <table>
+      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
+      <tr><td>Тестирование</td><td>Проверка всех сценариев</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>UI-фиксы</td><td>Адаптация, стили, баги</td><td class="status todo">⏳ Планируется</td></tr>
+      <tr><td>Roadmap-сайт</td><td>Эта страница на GitHub Pages</td><td class="status wip">🛠 В процессе</td></tr>
+      <tr><td>Финальный билд</td><td>Сборка и передача</td><td class="status todo">⏳ Планируется</td></tr>
+    </table>
+  </section>
+</body>
+</html>
