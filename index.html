@@ -6,127 +6,517 @@
   <title>Roadmap — Telegram WebApp Casino</title>
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #000000;
-      --accent: #1e1e1e;
-      --gray: #dcdcdc;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --text-primary: #000000;
+      --text-secondary: #4a4a4a;
+      --text-muted: #6c757d;
+      --border-light: #e9ecef;
+      --border-dark: #000000;
+      --accent: #000000;
     }
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
     header {
       background: var(--accent);
-      color: #fff;
-      padding: 2rem;
+      color: white;
+      padding: 60px 0;
       text-align: center;
+      border-bottom: 3px solid var(--border-dark);
     }
+
     header h1 {
-      margin: 0;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
     }
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
+
+    header .subtitle {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 10px;
     }
+
+    header .meta {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+
+    /* Main Content */
+    main {
+      padding: 80px 0;
+    }
+
     section {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
+      margin-bottom: 80px;
     }
+
+    /* Typography */
     h2 {
-      margin-top: 2rem;
-      border-bottom: 2px solid var(--gray);
-      padding-bottom: 0.3rem;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 15px;
     }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 50px 0 30px 0;
+      color: var(--text-primary);
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    ul li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    ul li:before {
+      content: "▪";
+      color: var(--accent);
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    /* Tables */
+    .table-container {
+      margin: 30px 0;
+      border: 1px solid var(--border-light);
+      overflow-x: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
+      background: var(--bg-primary);
     }
-    th, td {
-      padding: 0.75rem;
-      border-bottom: 1px solid var(--gray);
-      text-align: left;
-      font-size: 0.95rem;
-    }
+
     th {
-      background-color: #f2f2f2;
+      background: var(--bg-secondary);
+      padding: 20px 25px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-dark);
+      border-right: 1px solid var(--border-light);
     }
+
+    th:last-child {
+      border-right: none;
+    }
+
+    td {
+      padding: 20px 25px;
+      border-bottom: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      font-size: 0.95rem;
+      vertical-align: top;
+    }
+
+    td:last-child {
+      border-right: none;
+    }
+
+    tr:hover {
+      background: var(--bg-secondary);
+    }
+
+    /* Week Goals */
+    .week-goal {
+      background: var(--bg-secondary);
+      padding: 25px;
+      margin: 30px 0;
+      border-left: 4px solid var(--accent);
+    }
+
+    .week-goal p {
+      margin: 0;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Status indicators */
+    .status-legend {
+      margin: 40px 0;
+    }
+
+    .status-legend table {
+      max-width: 400px;
+    }
+
+    .status-legend th,
+    .status-legend td {
+      padding: 15px 20px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 2px;
+      background: var(--border-dark);
+      margin: 60px 0;
+    }
+
+    /* Code styling */
     code {
-      background: #eee;
-      padding: 2px 4px;
-      border-radius: 3px;
-      font-size: 0.9rem;
+      background: var(--bg-secondary);
+      padding: 3px 8px;
+      font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.9em;
+      border: 1px solid var(--border-light);
     }
-    .status {
-      font-weight: bold;
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 40px 0;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 40px 0;
+      }
+
+      section {
+        margin-bottom: 50px;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin: 40px 0 20px 0;
+      }
+
+      th, td {
+        padding: 15px 12px;
+        font-size: 0.9rem;
+      }
+
+      .week-goal {
+        padding: 20px;
+      }
     }
-    .done { color: green; }
-    .wip { color: orange; }
-    .todo { color: gray; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Roadmap: Telegram WebApp Casino</h1>
-    <p>Проект: Web-приложение казино с кейсами, TON-платежами и игровыми механиками</p>
-    <p>Дедлайн: 25 августа 2025 • Этап: <strong>Production Beta</strong></p>
+    <div class="container">
+      <h1>🚀 4-недельный Roadmap: Telegram WebApp-казино</h1>
+      <p class="subtitle"><strong>Цель:</strong> Разработка Telegram-игры Crazy_gyft, инвентарём, TON-платежами, апгрейдом и прочими ключевыми функциями до состояния Production Beta.</p>
+      <p class="meta">Дедлайн: 25 августа 2025 • Этап: <strong>Production Beta</strong></p>
+    </div>
   </header>
 
-  <section>
-    <h2>🎯 Цели проекта</h2>
-    <ul>
-      <li>Создать Telegram WebApp-казино с кейсами, апгрейдами и экономикой</li>
-      <li>Интегрировать реальные платежи через TON</li>
-      <li>Обеспечить хранение данных (баланс, инвентарь, история)</li>
-      <li>Добавить демо-режим, фильтрацию, поддержку и рефералку</li>
-      <li>Обеспечить прозрачную визуализацию прогресса разработки</li>
-    </ul>
+  <main>
+    <div class="container">
+      <section>
+        <h2>🔧 Общая структура этапов</h2>
+        <ul>
+          <li><strong>Week 1</strong> — Базовый MVP (UI, демо, инвентарь)</li>
+          <li><strong>Week 2</strong> — Реальные платежи, база данных, история</li>
+          <li><strong>Week 3</strong> — Апгрейды, лайв-лента, рефералка</li>
+          <li><strong>Week 4</strong> — Тестирование, полировка, сборка, выгрузка на хостинг</li>
+        </ul>
+      </section>
 
-    <h2>📆 Roadmap (4 недели)</h2>
+      <div class="divider"></div>
 
-    <h3>Week 1: MVP и демо-прототип</h3>
-    <table>
-      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
-      <tr><td>Главный UI</td><td>Кейсы, баланс, профиль</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Демо-режим</td><td>Фейковое открытие кейсов</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Инвентарь</td><td>Выигрыши с продажей</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>LocalStorage</td><td>Баланс и инвентарь</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>TonConnect</td><td>Подключение кошелька</td><td class="status todo">⏳ Планируется</td></tr>
-    </table>
+      <section>
+        <h2>📆 WEEK 1: MVP и демо-прототип (28 июля — 3 августа)</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Задача</th>
+                <th>Детали</th>
+                <th>Результат</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>UI: Главная страница</td>
+                <td>Кейсы, кнопка баланса, профиль, фиксированный верх</td>
+                <td>HTML/CSS, адаптив</td>
+              </tr>
+              <tr>
+                <td>UI: Кейс</td>
+                <td>Просмотр кейса, кнопка открытия</td>
+                <td>Без логики</td>
+              </tr>
+              <tr>
+                <td>Демо-режим</td>
+                <td>Открытие кейсов с фейковыми результатами</td>
+                <td>🎲 Рандом + инвентарь</td>
+              </tr>
+              <tr>
+                <td>Инвентарь</td>
+                <td>Список призов с кнопками «продать»</td>
+                <td>Баланс обновляется</td>
+              </tr>
+              <tr>
+                <td>Локальное хранилище</td>
+                <td>Баланс, инвентарь сохраняются в <code>localStorage</code></td>
+                <td>Без бэкенда</td>
+              </tr>
+              <tr>
+                <td>Подключение TonConnect</td>
+                <td>Веб-кошелёк TON (без транзакций)</td>
+                <td>Отображение TON-адреса и баланса</td>
+              </tr>
+              <tr>
+                <td>Базовая стилизация и адаптация</td>
+                <td>Под Telegram WebApp API</td>
+                <td>Mobile-friendly</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="week-goal">
+          <p>🟢 <strong>Цель недели:</strong> запустить полноценный демо-прототип, чтобы показать механику и UI.</p>
+        </div>
+      </section>
 
-    <h3>Week 2: TON и база данных</h3>
-    <table>
-      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
-      <tr><td>База данных</td><td>SQLite или Firebase</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>TON-платежи</td><td>Интеграция Tonkeeper</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Пополнение звёзд</td><td>Фиктивное с бонусами</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>История операций</td><td>Пополнения, кейсы</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Категории кейсов</td><td>Группы и шансы</td><td class="status todo">⏳ Планируется</td></tr>
-    </table>
+      <div class="divider"></div>
 
-    <h3>Week 3: Игровая логика и удержание</h3>
-    <table>
-      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
-      <tr><td>Апгрейд</td><td>Риск ×2/×3/×10</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Вывод подарков</td><td>Заморозка и уведомление</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Live-лента</td><td>Победы в реальном времени</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Рефералка</td><td>Ссылка, доход</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>История всего</td><td>Открытия, апгрейды, выводы</td><td class="status todo">⏳ Планируется</td></tr>
-    </table>
+      <section>
+        <h2>📆 WEEK 2: База данных и реальные TON-функции (4 – 10 августа)</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Задача</th>
+                <th>Детали</th>
+                <th>Результат</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>База данных</td>
+                <td>SQLite или Firebase (пользователи, баланс, инвентарь)</td>
+                <td>Структура и CRUD</td>
+              </tr>
+              <tr>
+                <td>Реальные TON-платежи</td>
+                <td>Пополнение TON через Tonkeeper</td>
+                <td>Тестовые микроплатежи</td>
+              </tr>
+              <tr>
+                <td>Пополнение звёзд</td>
+                <td>Фиктивное (кнопка + бонус)</td>
+                <td>Обновление баланса</td>
+              </tr>
+              <tr>
+                <td>История операций</td>
+                <td>Покупки, пополнения, выигрыши</td>
+                <td>Отображение по дате</td>
+              </tr>
+              <tr>
+                <td>Кейсы с категориями</td>
+                <td>"Малые", "Средние", "Гранд" + шансы</td>
+                <td>JSON или БД</td>
+              </tr>
+              <tr>
+                <td>Мини-админка</td>
+                <td>Редактирование кейсов (JSON файл или через форму)</td>
+                <td>Только для разработчика</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="week-goal">
+          <p>🟢 <strong>Цель недели:</strong> запустить реальную экономику: TON, звёзды, история, кейсы.</p>
+        </div>
+      </section>
 
-    <h3>Week 4: Полировка и публикация</h3>
-    <table>
-      <tr><th>Задача</th><th>Детали</th><th>Статус</th></tr>
-      <tr><td>Тестирование</td><td>Проверка всех сценариев</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>UI-фиксы</td><td>Адаптация, стили, баги</td><td class="status todo">⏳ Планируется</td></tr>
-      <tr><td>Roadmap-сайт</td><td>Эта страница на GitHub Pages</td><td class="status wip">🛠 В процессе</td></tr>
-      <tr><td>Финальный билд</td><td>Сборка и передача</td><td class="status todo">⏳ Планируется</td></tr>
-    </table>
-  </section>
+      <div class="divider"></div>
+
+      <section>
+        <h2>📆 WEEK 3: Игровая механика и удержание (11 – 17 августа)</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Задача</th>
+                <th>Детали</th>
+                <th>Результат</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Апгрейд предметов</td>
+                <td>Выбор предмета, шанс ×2 ×3 ×10</td>
+                <td>С потерей при неудаче</td>
+              </tr>
+              <tr>
+                <td>Вывод предметов</td>
+                <td>Кнопка "вывод" → заморозка, уведомление админу</td>
+                <td>Уведомление через Telegram</td>
+              </tr>
+              <tr>
+                <td>Live-лента выигрышей</td>
+                <td>Рандом или реальные с задержкой</td>
+                <td>Отображается на главной</td>
+              </tr>
+              <tr>
+                <td>Фильтр кейсов</td>
+                <td>По категории и цене</td>
+                <td>UX-удобство</td>
+              </tr>
+              <tr>
+                <td>Рефералка</td>
+                <td>Ссылка, счётчик рефералов, награды</td>
+                <td>Копирование ссылки</td>
+              </tr>
+              <tr>
+                <td>История апгрейдов / выводов</td>
+                <td>В профиле или отдельной вкладке</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="week-goal">
+          <p>🟢 <strong>Цель недели:</strong> собрать полный игровой цикл, добавить вовлечение и вариативность.</p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>📆 WEEK 4: Тесты, правки, GitHub Pages (18 – 25 августа)</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Задача</th>
+                <th>Детали</th>
+                <th>Результат</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Финальное тестирование</td>
+                <td>Все кейсы, платежи, апгрейды, профили</td>
+                <td>✔ Проверка юзабилити</td>
+              </tr>
+              <tr>
+                <td>Мелкие багфиксы</td>
+                <td>Звуки, стили, адаптация</td>
+                <td>Стабильная сборка</td>
+              </tr>
+              <tr>
+                <td>UI-полировка</td>
+                <td>Уточнение цветов, шрифтов, иконок</td>
+                <td>🎨 Минимализм, чистота</td>
+              </tr>
+              <tr>
+                <td>Страница roadmap</td>
+                <td>Сайт на GitHub Pages с таблицей статуса</td>
+                <td>Публичный трекер</td>
+              </tr>
+              <tr>
+                <td>Документация</td>
+                <td>Краткое описание кода, как всё работает</td>
+                <td>README + как разворачивать</td>
+              </tr>
+              <tr>
+                <td>Выгрузка на GitHub Pages</td>
+                <td>Готовая сборка, обновляемая вручную или через CI</td>
+                <td>Сайт доступен для клиента</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="week-goal">
+          <p>🟢 <strong>Цель недели:</strong> всё собрать, отполировать и отдать заказчику сайт и WebApp-сборку.</p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="status-legend">
+        <h2>📊 Дополнительно: Статусы задач</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Статус</th>
+                <th>Обозначение</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>✅</td>
+                <td>Готово</td>
+              </tr>
+              <tr>
+                <td>🛠</td>
+                <td>В процессе</td>
+              </tr>
+              <tr>
+                <td>⏳</td>
+                <td>Планируется</td>
+              </tr>
+              <tr>
+                <td>❌</td>
+                <td>Блокировано</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
 </body>
 </html>
