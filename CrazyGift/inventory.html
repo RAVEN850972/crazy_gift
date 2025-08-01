@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Inventory - CrazyGift</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="app-logo" onclick="window.location.href='inventory.html'">
+                <img src="assets/logo_icon.png" alt="Logo" onerror="this.innerHTML='⚡'">
+            </div>
+        </div>
+        
+        <div class="app-title">
+            <h1>CrazyGift</h1>
+            <div class="subtitle">мини-приложение</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="balance-widget" onclick="window.location.href='topup.html'">
+                <img src="assets/star_icon.png" alt="Stars" class="balance-icon">
+                <span class="balance-amount" id="balance">1451</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <div class="profile-avatar">
+                <div class="avatar-circle">
+                    <div class="avatar-logo">
+                        <img src="assets/logo_icon.png" alt="Avatar" onerror="this.innerHTML='⚡'">
+                    </div>
+                </div>
+                <div class="settings-icon" onclick="window.location.href='settings.html'">
+                    ⚙️
+                </div>
+            </div>
+            
+            <div class="profile-info">
+                <h2 id="profileName">Avalanche Studio</h2>
+                <p class="profile-stats">Открыто кейсов: <span id="casesOpened">85</span></p>
+            </div>
+        </section>
+
+        <!-- Filter Tabs -->
+        <section class="filter-tabs">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-filter="all" onclick="filterItems('all')">
+                    Все
+                </button>
+                <button class="tab-btn" data-filter="sellable" onclick="filterItems('sellable')">
+                    Можно продать
+                </button>
+                <button class="tab-btn" data-filter="rare" onclick="filterItems('rare')">
+                    Редкие
+                </button>
+                <button class="tab-btn" data-filter="legendary" onclick="filterItems('legendary')">
+                    Обычные
+                </button>
+            </div>
+        </section>
+
+        <!-- Inventory Grid -->
+        <section class="inventory-section">
+            <div class="inventory-grid" id="inventoryGrid">
+                <!-- Items will be populated by JavaScript -->
+            </div>
+            
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">📦</div>
+                <h3>Инвентарь пуст</h3>
+                <p>Откройте кейсы, чтобы получить предметы</p>
+                <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                    Открыть кейсы
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">
+                <img src="assets/home_icon.png" alt="Home" class="nav-icon">
+                <span class="nav-text">Main</span>
+            </a>
+            <a href="upgrade.html" class="nav-item">
+                <img src="assets/upgrade_icon.png" alt="Upgrade" class="nav-icon">
+                <span class="nav-text">Upgrade</span>
+            </a>
+            <a href="partner.html" class="nav-item">
+                <img src="assets/refferal_icon.png" alt="Partner" class="nav-icon">
+                <span class="nav-text">Partner</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- JavaScript -->
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/game.js"></script>
+
+    <style>
+        .profile-section {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-avatar {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .avatar-logo {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-logo img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .settings-icon {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 30px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .settings-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-info h2 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .profile-stats {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .profile-stats span {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        .filter-tabs {
+            margin-bottom: 25px;
+        }
+
+        .tabs-container {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 6px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .tab-btn:not(.active):hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .inventory-section {
+            min-height: 300px;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .inventory-item {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-small);
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .inventory-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-yellow);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .inventory-item.rare {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(29, 78, 216, 0.1));
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .inventory-item.epic {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.1));
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .inventory-item.legendary {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .inventory-item.mythic {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 8px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-small);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .item-info {
+            font-size: 11px;
+        }
+
+        .item-value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .item-value img {
+            width: 10px;
+            height: 10px;
+        }
+
+        .item-stars {
+            color: var(--accent-yellow);
+            font-size: 10px;
+        }
+
+        .rarity-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .rarity-common { background: #ffffff; }
+        .rarity-rare { background: #3b82f6; }
+        .rarity-epic { background: #8b5cf6; }
+        .rarity-legendary { background: #f59e0b; }
+        .rarity-mythic { background: #ef4444; }
+
+        .upgraded-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--accent-yellow);
+            color: var(--bg-primary);
+            font-size: 8px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 375px) {
+            .profile-section {
+                padding: 20px;
+            }
+
+            .avatar-circle {
+                width: 70px;
+                height: 70px;
+            }
+
+            .avatar-logo img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .inventory-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .inventory-item {
+                padding: 10px;
+            }
+
+            .item-image {
+                width: 45px;
+                height: 45px;
+            }
+
+            .tabs-container {
+                padding: 4px;
+            }
+
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+
+    <script>
+        // Demo inventory items
+        let inventoryItems = [
+            { id: 1, name: 'Record Player', value: 2.67, stars: 452, rarity: 'rare', image: 'assets/items/record.png', sellable: true },
+            { id: 2, name: 'Frog Character', value: 2.67, stars: 452, rarity: 'common', image: 'assets/items/frog.png', sellable: true },
+            { id: 3, name: 'Golden Star', value: 2.67, stars: 452, rarity: 'epic', image: 'assets/items/star.png', sellable: false },
+            { id: 4, name: 'Telegram Cap', value: 2.67, stars: 452, rarity: 'common', image: 'assets/items/cap.png', sellable: true },
+            { id: 5, name: 'Black Cat', value: 2.67, stars: 452, rarity: 'rare', image: 'assets/items/cat.png', sellable: true },
+            { id: 6, name: 'Blue Bow Tie', value: 2.67, stars: 452, rarity: 'common', image: 'assets/items/bowtie.png', sellable: true },
+            { id: 7, name: 'Golden Ring', value: 2.67, stars: 452, rarity: 'legendary', image: 'assets/items/ring.png', sellable: false, isUpgraded: true },
+            { id: 8, name: 'Golden Gift Box', value: 2.67, stars: 452, rarity: 'legendary', image: 'assets/items/giftbox.png', sellable: false, isUpgraded: true },
+            { id: 9, name: 'Pink Teddy Bear', value: 2.67, stars: 452, rarity: 'common', image: 'assets/items/teddy.png', sellable: true },
+            { id: 10, name: 'Roman Helmet', value: 2.67, stars: 452, rarity: 'epic', image: 'assets/items/helmet.png', sellable: true },
+            { id: 11, name: 'Ancient Scroll', value: 2.67, stars: 452, rarity: 'epic', image: 'assets/items/scroll.png', sellable: true },
+            { id: 12, name: 'Magic Hat', value: 2.67, stars: 452, rarity: 'mythic', image: 'assets/items/hat.png', sellable: false }
+        ];
+
+        let currentFilter = 'all';
+
+        // Initialize inventory page
+        function initInventoryPage() {
+            console.log('📦 Initializing inventory page');
+            
+            // Load inventory from GameState if available
+            if (GameState && GameState.inventory && GameState.inventory.length > 0) {
+                inventoryItems = GameState.inventory;
+            }
+            
+            updateProfileInfo();
+            renderInventory();
+            updateBalance();
+        }
+
+        function updateProfileInfo() {
+            const profileName = document.getElementById('profileName');
+            const casesOpened = document.getElementById('casesOpened');
+            
+            if (GameState && GameState.user) {
+                profileName.textContent = GameState.user.first_name || 'Пользователь';
+            }
+            
+            // Get stats from storage or use demo data
+            const stats = window.storageManager ? window.storageManager.loadStats() : { casesOpened: 85 };
+            casesOpened.textContent = stats.casesOpened || 85;
+        }
+
+        function filterItems(filter) {
+            currentFilter = filter;
+            
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+            
+            renderInventory();
+        }
+
+        function renderInventory() {
+            const inventoryGrid = document.getElementById('inventoryGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            let filteredItems = [...inventoryItems];
+            
+            // Apply filter
+            switch(currentFilter) {
+                case 'sellable':
+                    filteredItems = filteredItems.filter(item => item.sellable);
+                    break;
+                case 'rare':
+                    filteredItems = filteredItems.filter(item => 
+                        ['rare', 'epic', 'legendary', 'mythic'].includes(item.rarity));
+                    break;
+                case 'legendary':
+                    filteredItems = filteredItems.filter(item => item.rarity === 'common');
+                    break;
+                case 'all':
+                default:
+                    // Show all items
+                    break;
+            }
+            
+            if (filteredItems.length === 0) {
+                inventoryGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            inventoryGrid.style.display = 'grid';
+            emptyState.style.display = 'none';
+            
+            inventoryGrid.innerHTML = filteredItems.map(item => `
+                <div class="inventory-item ${item.rarity}" onclick="openItemModal(${item.id})" data-item-id="${item.id}">
+                    <div class="rarity-badge rarity-${item.rarity}"></div>
+                    ${item.isUpgraded ? '<div class="upgraded-badge">UP</div>' : ''}
+                    <div class="item-image">
+                        <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-value">
+                            <img src="assets/star_icon.png" alt="Stars">
+                            ${item.value}
+                        </div>
+                        <div class="item-stars">⭐ ${item.stars}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Add animations
+            const items = inventoryGrid.querySelectorAll('.inventory-item');
+            items.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.05}s`;
+                item.classList.add('fade-in');
+            });
+        }
+
+        function openItemModal(itemId) {
+            const item = inventoryItems.find(i => i.id === itemId);
+            if (!item) return;
+            
+            const rarityColors = {
+                common: '#ffffff',
+                rare: '#3b82f6',
+                epic: '#8b5cf6',
+                legendary: '#f59e0b',
+                mythic: '#ef4444'
+            };
+            
+            const rarityNames = {
+                common: 'Обычный',
+                rare: 'Редкий',
+                epic: 'Эпический',
+                legendary: 'Легендарный',
+                mythic: 'Мифический'
+            };
+            
+            // Simple modal using alert for now
+            const message = `${item.name}\n\nРедкость: ${rarityNames[item.rarity]}${item.isUpgraded ? ' (Улучшенный)' : ''}\nСтоимость: ${item.value} ⭐\nЗвёзды: ⭐ ${item.stars}`;
+            
+            const action = confirm(`${message}\n\n${item.sellable ? 'Продать предмет?' : 'Закрыть?'}`);
+            
+            if (action && item.sellable) {
+                sellItem(itemId);
+            }
+        }
+
+        function sellItem(itemId) {
+            const item = inventoryItems.find(i => i.id === itemId);
+            if (!item || !item.sellable) return;
+            
+            const confirmSell = confirm(`Вы уверены, что хотите продать "${item.name}" за ${item.value} ⭐?`);
+            
+            if (confirmSell) {
+                // Remove item from inventory
+                const itemIndex = inventoryItems.findIndex(i => i.id === itemId);
+                if (itemIndex !== -1) {
+                    inventoryItems.splice(itemIndex, 1);
+                    
+                    // Add stars to balance
+                    if (window.GameState) {
+                        GameState.balance += item.value;
+                    }
+                    
+                    // Update GameState inventory
+                    if (window.GameState) {
+                        GameState.inventory = inventoryItems;
+                    }
+                    
+                    // Save and update UI
+                    saveGameState();
+                    updateBalance();
+                    renderInventory();
+                    
+                    alert(`Продано! +${item.value} ⭐`);
+                }
+            }
+        }
+
+        function updateBalance() {
+            const balance = document.getElementById('balance');
+            if (balance && window.GameState) {
+                balance.textContent = GameState.balance || 1451;
+            }
+        }
+
+        function saveGameState() {
+            if (window.GameState) {
+                try {
+                    localStorage.setItem('crazyGiftGameState', JSON.stringify(GameState));
+                } catch (e) {
+                    console.error('Failed to save game state:', e);
+                }
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize GameState if not exists
+            if (!window.GameState) {
+                window.GameState = {
+                    balance: 1451,
+                    inventory: inventoryItems,
+                    settings: {
+                        soundEnabled: true,
+                        vibrateEnabled: true,
+                        animationsEnabled: true
+                    }
+                };
+            }
+            
+            initInventoryPage();
+        });
+    </script>
+</body>
+</html>

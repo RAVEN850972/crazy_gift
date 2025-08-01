@@ -1,0 +1,530 @@
+/* === KEYFRAME ANIMATIONS === */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -10px, 0);
+    }
+    70% {
+        transform: translate3d(0, -5px, 0);
+    }
+    90% {
+        transform: translate3d(0, -2px, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--accent-yellow);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--accent-yellow), 0 0 30px var(--accent-orange);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes wiggle {
+    0%, 7% {
+        transform: rotateZ(0);
+    }
+    15% {
+        transform: rotateZ(-15deg);
+    }
+    20% {
+        transform: rotateZ(10deg);
+    }
+    25% {
+        transform: rotateZ(-10deg);
+    }
+    30% {
+        transform: rotateZ(6deg);
+    }
+    35% {
+        transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+        transform: rotateZ(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+}
+
+/* === ANIMATION CLASSES === */
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+.slide-in-up {
+    animation: slideInUp 0.4s ease-out forwards;
+}
+
+.slide-in-down {
+    animation: slideInDown 0.4s ease-out forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.4s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.4s ease-out forwards;
+}
+
+.scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+.scale-out {
+    animation: scaleOut 0.3s ease-out forwards;
+}
+
+.bounce {
+    animation: bounce 1s ease-out;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+.glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.wiggle {
+    animation: wiggle 1s ease-in-out;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+.slide-down {
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+.zoom-in {
+    animation: zoomIn 0.4s ease-out forwards;
+}
+
+.zoom-out {
+    animation: zoomOut 0.4s ease-out forwards;
+}
+
+/* === CASE OPENING ANIMATIONS === */
+
+@keyframes caseOpenSpin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes itemReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotateY(180deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8) rotateY(90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+}
+
+@keyframes rarity-common {
+    0%, 100% {
+        box-shadow: 0 0 10px #ffffff;
+    }
+    50% {
+        box-shadow: 0 0 20px #ffffff, 0 0 30px #cccccc;
+    }
+}
+
+@keyframes rarity-rare {
+    0%, 100% {
+        box-shadow: 0 0 10px #3b82f6;
+    }
+    50% {
+        box-shadow: 0 0 20px #3b82f6, 0 0 30px #1d4ed8;
+    }
+}
+
+@keyframes rarity-epic {
+    0%, 100% {
+        box-shadow: 0 0 10px #8b5cf6;
+    }
+    50% {
+        box-shadow: 0 0 20px #8b5cf6, 0 0 30px #7c3aed;
+    }
+}
+
+@keyframes rarity-legendary {
+    0%, 100% {
+        box-shadow: 0 0 10px #f59e0b;
+    }
+    50% {
+        box-shadow: 0 0 20px #f59e0b, 0 0 30px #d97706;
+    }
+}
+
+@keyframes rarity-mythic {
+    0%, 100% {
+        box-shadow: 0 0 10px #ef4444;
+    }
+    50% {
+        box-shadow: 0 0 20px #ef4444, 0 0 30px #dc2626;
+    }
+}
+
+/* === RARITY ANIMATION CLASSES === */
+
+.case-opening {
+    animation: caseOpenSpin 1.5s ease-in-out;
+}
+
+.item-reveal {
+    animation: itemReveal 1s ease-out;
+}
+
+.rarity-common {
+    animation: rarity-common 2s ease-in-out infinite;
+}
+
+.rarity-rare {
+    animation: rarity-rare 2s ease-in-out infinite;
+}
+
+.rarity-epic {
+    animation: rarity-epic 2s ease-in-out infinite;
+}
+
+.rarity-legendary {
+    animation: rarity-legendary 2s ease-in-out infinite;
+}
+
+.rarity-mythic {
+    animation: rarity-mythic 2s ease-in-out infinite;
+}
+
+/* === HOVER EFFECTS === */
+
+.hover-lift {
+    transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px var(--accent-yellow);
+}
+
+/* === LOADING ANIMATIONS === */
+
+@keyframes dots {
+    0%, 20% {
+        color: rgba(255, 255, 255, 0);
+        text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0),
+                     0.5em 0 0 rgba(255, 255, 255, 0);
+    }
+    40% {
+        color: white;
+        text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0),
+                     0.5em 0 0 rgba(255, 255, 255, 0);
+    }
+    60% {
+        text-shadow: 0.25em 0 0 white,
+                     0.5em 0 0 rgba(255, 255, 255, 0);
+    }
+    80%, 100% {
+        text-shadow: 0.25em 0 0 white,
+                     0.5em 0 0 white;
+    }
+}
+
+.loading-dots::after {
+    content: ' .';
+    animation: dots 1s steps(5, end) infinite;
+}
+
+/* === PROGRESS ANIMATIONS === */
+
+@keyframes progressFill {
+    from {
+        width: 0%;
+    }
+}
+
+.progress-animated .progress-bar {
+    animation: progressFill 1s ease-out;
+}
+
+/* === NOTIFICATION ANIMATIONS === */
+
+@keyframes notificationSlide {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-enter {
+    animation: notificationSlide 0.3s ease-out;
+}
+
+/* === REDUCE MOTION === */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* === ANIMATION DELAYS === */
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* === ANIMATION SPEEDS === */
+
+.animate-fast {
+    animation-duration: 0.15s !important;
+}
+
+.animate-slow {
+    animation-duration: 1s !important;
+}
+
+.animate-slower {
+    animation-duration: 2s !important;
+}
+
+/* === INFINITE ANIMATIONS === */
+
+.animate-infinite {
+    animation-iteration-count: infinite;
+}

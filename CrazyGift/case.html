@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Case - CrazyGift</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="app-logo" onclick="window.location.href='inventory.html'">
+                <img src="assets/icons/triangle_icon.png" alt="Logo" onerror="this.innerHTML='⚡'">
+            </div>
+        </div>
+        
+        <div class="app-title">
+            <h1>CrazyGift</h1>
+            <div class="subtitle">мини-приложение</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="balance-widget" onclick="window.location.href='topup.html'">
+                <img src="assets/icons/star_icon.png" alt="Stars" class="balance-icon">
+                <span class="balance-amount" id="balance">1451</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Case Header -->
+        <section class="case-header">
+            <div class="case-title-container">
+                <h2 id="caseTitle">Telegram Case #1</h2>
+                <div class="case-title-underline"></div>
+            </div>
+
+            <!-- Featured Items -->
+            <div class="featured-items">
+                <div class="featured-item" id="featuredItem1">
+                    <img src="assets/gifts/gift1.png" alt="Record Player" onerror="this.style.display='none'">
+                    <div class="featured-item-info">
+                        <div class="item-value">
+                            <img src="assets/icons/ton_icon.png" alt="Stars">
+                            2.67
+                        </div>
+                        <div class="item-stars">⭐ 452</div>
+                    </div>
+                </div>
+
+                <div class="featured-item" id="featuredItem2">
+                    <img src="assets/gifts/gift2.png" alt="Gift Bag" onerror="this.style.display='none'">
+                    <div class="featured-item-info">
+                        <div class="item-value">
+                            <img src="assets/icons/ton_icon.png" alt="Stars">
+                            2.67
+                        </div>
+                        <div class="item-stars">⭐ 452</div>
+                    </div>
+                </div>
+
+                <div class="featured-item" id="featuredItem3">
+                    <img src="assets/gifts/gift3.png" alt="Cap" onerror="this.style.display='none'">
+                    <div class="featured-item-info">
+                        <div class="item-value">
+                            <img src="assets/icons/ton_icon.png" alt="Stars">
+                            2.67
+                        </div>
+                        <div class="item-stars">⭐ 452</div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-title-underline2"></div>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="case-actions">
+            <button class="btn btn-primary btn-full case-open-btn" onclick="openCurrentCase()">
+                Открыть кейс
+            </button>
+            
+            <button class="btn btn-secondary btn-full demo-btn" onclick="toggleDemoMode()">
+                Демо-режим
+            </button>
+        </section>
+
+        <!-- Case Contents -->
+        <section class="case-contents">
+            <h3>Содержимое кейса</h3>
+            
+            <div class="contents-grid" id="contentsGrid">
+                <!-- Items will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item active">
+                <img src="assets/icons/home_icon.png" alt="Home" class="nav-icon">
+                <span class="nav-text">Main</span>
+            </a>
+            <a href="upgrade.html" class="nav-item">
+                <img src="assets/icons/upgrade_icon.png" alt="Upgrade" class="nav-icon">
+                <span class="nav-text">Upgrade</span>
+            </a>
+            <a href="partner.html" class="nav-item">
+                <img src="assets/icons/refferal_icon.png" alt="Partner" class="nav-icon">
+                <span class="nav-text">Partner</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- JavaScript -->
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/game.js"></script>
+
+    <style>
+        .case-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .case-title-container {
+            margin-bottom: 30px;
+        }
+
+        .case-title-container h2 {
+            color: var(--accent-yellow);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .case-title-underline {
+            width: 180px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .case-title-underline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--accent-yellow);
+        }
+
+        .case-title-underline2 {
+            width: 180px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .case-title-underline2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0px;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--accent-yellow);
+        }
+
+        .featured-items {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding: 0 10px;
+        }
+
+        .featured-item {
+            flex-shrink: 0;
+            width: 100px;
+            background: #1F1F21;
+            border-radius: var(--border-radius-small);
+            padding: 15px 10px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s;
+            border: 1px solid var(--bg-secondary);
+        }
+
+        .featured-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-yellow);
+        }
+
+        .featured-item-image {
+            margin: 0 auto 10px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-small);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .featured-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .featured-item-info {
+            font-size: 11px;
+        }
+
+        .item-value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .item-value img {
+            width: 10px;
+            height: 10px;
+        }
+
+        .item-stars {
+            color: var(--accent-yellow);
+            font-size: 10px;
+        }
+
+        .case-actions {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .case-open-btn {
+            font-size: 18px;
+            padding: 16px 24px;
+            font-weight: 700;
+        }
+
+        .demo-btn {
+            font-size: 14px;
+            padding: 12px 24px;
+        }
+
+        .case-contents {
+            margin-bottom: 30px;
+        }
+
+        .case-contents h3 {
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contents-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .content-item {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-small);
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.2s;
+            border: 1px solid var(--bg-secondary);
+        }
+
+        .content-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-yellow);
+        }
+
+        .content-item-image {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 8px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-small);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .content-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .content-item-info {
+            font-size: 11px;
+        }
+
+        .content-item-value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .content-item-value img {
+            width: 10px;
+            height: 10px;
+        }
+
+        .content-item-stars {
+            color: var(--accent-yellow);
+            font-size: 10px;
+        }
+
+        .rarity-indicator {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .rarity-common { background: #ffffff; }
+        .rarity-rare { background: #3b82f6; }
+        .rarity-epic { background: #8b5cf6; }
+        .rarity-legendary { background: #f59e0b; }
+        .rarity-mythic { background: #ef4444; }
+
+        .opening-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .opening-case {
+            width: 150px;
+            height: 150px;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opening-case.spinning {
+            animation: caseOpenSpin 1.5s ease-in-out;
+        }
+
+        .opening-text {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        @media (max-width: 375px) {
+            .featured-items {
+                gap: 10px;
+                padding: 0 5px;
+            }
+
+            .featured-item {
+                width: 90px;
+                padding: 12px 8px;
+            }
+
+            .featured-item-image {
+                width: 50px;
+                height: 50px;
+            }
+
+            .contents-grid {
+                gap: 10px;
+            }
+        }
+    </style>
+
+    <script>
+        // Current case data
+        let currentCase = null;
+        let isDemoMode = false;
+
+        // Case items data
+        const caseItems = {
+            1: [
+                { id: 1, name: 'Blue Bow Tie', value: 2.67, stars: 452, rarity: 'common', image: 'assets/gifts/gift1.png' },
+                { id: 2, name: 'Golden Gift Bag', value: 2.67, stars: 452, rarity: 'rare', image: 'assets/gifts/gift2.png' },
+                { id: 3, name: 'Telegram Cap', value: 2.67, stars: 452, rarity: 'common', image: 'assets/gifts/gift3.png' },
+                { id: 4, name: 'Pink Teddy Bear', value: 2.67, stars: 452, rarity: 'common', image: 'assets/gifts/gift4.png' },
+                { id: 5, name: 'Black Cat', value: 2.67, stars: 452, rarity: 'rare', image: 'assets/gifts/gift5.png' },
+                { id: 6, name: 'Golden Ring', value: 2.67, stars: 452, rarity: 'epic', image: 'assets/gifts/gift6.png' }
+            ],
+            2: [
+                { id: 7, name: 'Record Player', value: 2.67, stars: 452, rarity: 'rare', image: 'assets/gifts/gift7.png' },
+                { id: 8, name: 'Magic Wand', value: 2.67, stars: 452, rarity: 'epic', image: 'assets/gifts/gift8.png' },
+                { id: 9, name: 'Crown', value: 2.67, stars: 452, rarity: 'legendary', image: 'assets/items/gift9.png' }
+            ]
+        };
+
+        // Initialize case page
+        function initCasePage() {
+            console.log('📦 Initializing case page');
+            
+            // Get case ID from URL params or default to 1
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseId = parseInt(urlParams.get('id')) || 1;
+            
+            loadCaseData(caseId);
+            updateBalance();
+        }
+
+        function loadCaseData(caseId) {
+            // Get case data from game manager or fallback
+            const casesData = {
+                1: { id: 1, name: 'Telegram Case #1', price: 150 },
+                2: { id: 2, name: 'Telegram Case #2', price: 250 },
+                3: { id: 3, name: 'Premium Case', price: 500 },
+                4: { id: 4, name: 'Elite Case', price: 1000 }
+            };
+
+            currentCase = casesData[caseId] || casesData[1];
+            
+            // Update page title
+            document.getElementById('caseTitle').textContent = currentCase.name;
+            document.title = `${currentCase.name} - CrazyGift`;
+            
+            // Load case contents
+            loadCaseContents(caseId);
+        }
+
+        function loadCaseContents(caseId) {
+            const items = caseItems[caseId] || caseItems[1];
+            const contentsGrid = document.getElementById('contentsGrid');
+            
+            contentsGrid.innerHTML = items.map(item => `
+                <div class="content-item">
+                    <div class="rarity-indicator rarity-${item.rarity}"></div>
+                    <div class="content-item-image">
+                        <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div class="content-item-info">
+                        <div class="content-item-value">
+                            <img src="assets/star_icon.png" alt="Stars">
+                            ${item.value}
+                        </div>
+                        <div class="content-item-stars">⭐ ${item.stars}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleDemoMode() {
+            isDemoMode = !isDemoMode;
+            const demoBtn = document.querySelector('.demo-btn');
+            
+            if (isDemoMode) {
+                demoBtn.textContent = 'Выход из демо';
+                demoBtn.classList.remove('btn-secondary');
+                demoBtn.classList.add('btn-primary');
+                showNotification('Демо-режим активирован', 'info');
+            } else {
+                demoBtn.textContent = 'Демо-режим';
+                demoBtn.classList.remove('btn-primary');
+                demoBtn.classList.add('btn-secondary');
+                showNotification('Демо-режим отключен', 'info');
+            }
+        }
+
+        function openCurrentCase() {
+            if (!currentCase) return;
+
+            // Check balance in real mode
+            if (!isDemoMode) {
+                if (GameState.balance < currentCase.price) {
+                    showModal('💸 Недостаточно звёзд', `
+                        <div style="text-align: center;">
+                            <p>Для открытия кейса "${currentCase.name}" нужно <strong>${currentCase.price} ⭐</strong></p>
+                            <p>У вас: <strong>${GameState.balance} ⭐</strong></p>
+                        </div>
+                    `, {
+                        primaryText: 'Пополнить баланс',
+                        secondaryText: 'Отмена',
+                        onPrimary: () => window.location.href = 'topup.html'
+                    });
+                    return;
+                }
+            }
+
+            // Start opening animation
+            showOpeningAnimation();
+        }
+
+        function showOpeningAnimation() {
+            // Create opening overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'opening-animation';
+            overlay.style.display = 'flex';
+            
+            overlay.innerHTML = `
+                <div class="opening-case spinning">
+                    <img src="assets/cases/case${currentCase.id}.png" alt="Opening case" style="width: 100px; height: 100px; object-fit: contain;">
+                </div>
+                <div class="opening-text">Открываем кейс...</div>
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            // Show for 2 seconds then reveal item
+            setTimeout(() => {
+                revealItem(overlay);
+            }, 2000);
+        }
+
+        function revealItem(overlay) {
+            // Get random item from current case
+            const items = caseItems[currentCase.id] || caseItems[1];
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+            
+            // Deduct balance in real mode
+            if (!isDemoMode) {
+                GameState.balance -= currentCase.price;
+                updateBalance();
+                saveGameState();
+                
+                // Add to inventory
+                addToInventory({
+                    ...randomItem,
+                    id: generateId(),
+                    timestamp: new Date().toISOString()
+                });
+            }
+
+            // Update overlay with result
+            overlay.innerHTML = `
+                <div class="opening-case item-reveal" onclick="closeItemReveal()">
+                    <img src="${randomItem.image}" alt="${randomItem.name}" style="width: 100px; height: 100px; object-fit: contain;" class="rarity-${randomItem.rarity}">
+                </div>
+                <div class="opening-text">
+                    <div style="font-size: 24px; margin-bottom: 10px;">🎉</div>
+                    <div>Поздравляем!</div>
+                    <div style="font-size: 16px; color: var(--accent-yellow); margin-top: 10px;">
+                        ${randomItem.name}
+                    </div>
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-top: 5px;">
+                        ${randomItem.rarity} • ⭐ ${randomItem.stars}
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button onclick="closeItemReveal()" style="background: var(--accent-yellow); color: var(--bg-primary); border: none; padding: 8px 16px; border-radius: 15px; cursor: pointer;">
+                            ${!isDemoMode ? 'Забрать в инвентарь' : 'Закрыть'}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Auto close after 5 seconds
+            setTimeout(() => closeItemReveal(), 5000);
+
+            vibrate([100, 50, 100]);
+        }
+
+        function closeItemReveal() {
+            const overlay = document.querySelector('.opening-animation');
+            if (overlay) {
+                document.body.removeChild(overlay);
+                
+                if (!isDemoMode) {
+                    showNotification('Предмет добавлен в инвентарь!', 'success');
+                    updateInventoryCount();
+                } else {
+                    showNotification('Демо-открытие завершено', 'info');
+                }
+            }
+        }
+
+        // Utility functions
+        function updateBalance() {
+            const balance = document.getElementById('balance');
+            if (balance) {
+                balance.textContent = GameState?.balance || 1451;
+            }
+        }
+
+        function showNotification(message, type) {
+            // Simple notification system
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+
+        function vibrate(pattern) {
+            if (navigator.vibrate) {
+                navigator.vibrate(pattern);
+            }
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function addToInventory(item) {
+            if (!GameState.inventory) GameState.inventory = [];
+            GameState.inventory.push(item);
+        }
+
+        function saveGameState() {
+            try {
+                localStorage.setItem('crazyGiftGameState', JSON.stringify(GameState));
+            } catch (e) {
+                console.error('Failed to save game state:', e);
+            }
+        }
+
+        function updateInventoryCount() {
+            // Update inventory counter if exists
+        }
+
+        function showModal(title, content, options) {
+            alert(`${title}\n\n${content.replace(/<[^>]*>/g, '')}`);
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initCasePage();
+        });
+    </script>
+</body>
+</html>
